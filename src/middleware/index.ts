@@ -5,7 +5,7 @@ import {DotenvConfig} from '../config/env.config'
 import {morganMiddleware} from './morgan.middleware'
 import { errorHandler } from './errorHandler.middleware'
 import { StatusCodes } from '../constant/statusCodes'
-
+import router from '../routes/userroute'
 const middleware = (app:Application) => {
     console.log('DotenvConfig.CORS_ORIGIN', DotenvConfig.CORS_ORIGIN)
    
@@ -30,6 +30,7 @@ const middleware = (app:Application) => {
     }))
     app.use(morganMiddleware)
     app.use(errorHandler)
+    app.use('/',router)
     app.use(express.static(path.join(__dirname, '..', '..', 'public')))
     app.use('/public/uploads', express.static(path.join(__dirname, '..', '..', 'public/uploads')))
 
